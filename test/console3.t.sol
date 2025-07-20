@@ -13,15 +13,14 @@ contract console3Test is Test {
     function setUp() public {
         token = new ERC20Mock();
 
-        accounts = new address[](3);
+        accounts = new address[](5);
         for (uint256 i = 0; i < accounts.length; i++) {
             accounts[i] = makeAddr(string.concat("account", Strings.toString(i)));
-            token.mint(accounts[i], 1e18 * (i + 1));
+            token.mint(accounts[i], 10 ** i + i);
         }
     }
 
-    function test_log() public {
-        string memory message = console3.logMessage("ERC20Mock", token, accounts);
-        console3.log("ERC20Mock", token, accounts);
+    function test_log() public view {
+        console3.log(token, accounts);
     }
 }
