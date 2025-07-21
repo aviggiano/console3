@@ -50,13 +50,13 @@ library console3 {
         return string.concat(spaces(n > bytes(s).length ? n - bytes(s).length : 0), s);
     }
 
-    function logERC20(IERC20 token, address[] memory accounts) internal view {
+    function logERC20(address token, address[] memory accounts) internal view {
         string memory message = "";
-        uint256 maxDigits = digits(token.totalSupply());
+        uint256 maxDigits = digits(IERC20(token).totalSupply());
 
         message = string.concat(message, _buildERC20Header(maxDigits));
-        message = string.concat(message, _buildERC20Rows(token, accounts, maxDigits));
-        message = string.concat(message, _buildERC20Footer(token, accounts, maxDigits));
+        message = string.concat(message, _buildERC20Rows(IERC20(token), accounts, maxDigits));
+        message = string.concat(message, _buildERC20Footer(IERC20(token), accounts, maxDigits));
 
         console.log(message);
     }
@@ -132,13 +132,13 @@ library console3 {
         }
     }
 
-    function logERC4626(IERC4626 vault, address[] memory accounts) internal view {
+    function logERC4626(address vault, address[] memory accounts) internal view {
         string memory message = "";
-        uint256 maxDigits = digits(Math.max(vault.totalSupply(), vault.totalAssets()));
+        uint256 maxDigits = digits(Math.max(IERC4626(vault).totalSupply(), IERC4626(vault).totalAssets()));
 
         message = string.concat(message, _buildERC4626Header(maxDigits));
-        message = string.concat(message, _buildERC4626Rows(vault, accounts, maxDigits));
-        message = string.concat(message, _buildERC4626Footer(vault, accounts, maxDigits));
+        message = string.concat(message, _buildERC4626Rows(IERC4626(vault), accounts, maxDigits));
+        message = string.concat(message, _buildERC4626Footer(IERC4626(vault), accounts, maxDigits));
 
         console.log(message);
     }

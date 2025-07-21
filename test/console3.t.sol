@@ -37,10 +37,10 @@ contract console3Test is Test {
     }
 
     function test_logERC20() public view {
-        console3.logERC20(token1, accounts);
+        console3.logERC20(address(token1), accounts);
     }
 
     function test_logERC4626() public view {
-        console3.logERC4626(IERC4626(address(vault)), accounts);
+        console3.logERC4626(address(vault), accounts);
     }
 }
