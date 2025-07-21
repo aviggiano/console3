@@ -2,14 +2,6 @@
 
 Extended console.log in Solidity for ERC20 tokens and ERC4626 vaults.
 
-## Features
-
-- **Formatted ERC20 Balance Tables**: Display token balances across multiple accounts in a clean, aligned table format
-- **ERC4626 Vault Analytics**: Show both shares and underlying assets for vault positions
-- **Number Formatting**: Large numbers are formatted with underscores for better readability (e.g., `1_000_000`)
-- **Automatic Alignment**: Tables are automatically aligned based on the largest values
-- **Summary Statistics**: Includes totals and sums for verification
-
 ## Installation
 
 ```bash
