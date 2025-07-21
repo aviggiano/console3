@@ -10,11 +10,6 @@ import {Math} from "../lib/openzeppelin-contracts/contracts/utils/math/Math.sol"
 library console3 {
     uint256 private constant ADDRESS_LENGTH = 42;
 
-    enum ColumnType {
-        Address,
-        Uint256
-    }
-
     function spaces(uint256 n) internal pure returns (string memory ans) {
         for (uint256 i = 0; i < n; i++) {
             ans = string.concat(ans, " ");
