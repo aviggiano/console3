@@ -21,6 +21,7 @@ forge install aviggiano/console3
 ### ERC20 Token Balances
 
 ```solidity
+import {console3} from "console3.sol";
 console3.logERC20(token, accounts);
 ```
 
@@ -41,6 +42,7 @@ console3.logERC20(token, accounts);
 ### ERC4626 Vault Positions
 
 ```solidity
+import {console3} from "console3.sol";
 console3.logERC4626(vault, accounts);
 ```
 
