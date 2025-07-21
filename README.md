@@ -1,66 +1,59 @@
-## Foundry
+# console3
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Extended console.log in Solidity for ERC20 tokens and ERC4626 vaults.
 
-Foundry consists of:
+## Features
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **Formatted ERC20 Balance Tables**: Display token balances across multiple accounts in a clean, aligned table format
+- **ERC4626 Vault Analytics**: Show both shares and underlying assets for vault positions
+- **Number Formatting**: Large numbers are formatted with underscores for better readability (e.g., `1_000_000`)
+- **Automatic Alignment**: Tables are automatically aligned based on the largest values
+- **Summary Statistics**: Includes totals and sums for verification
 
-## Documentation
+## Installation
 
-https://book.getfoundry.sh/
+```bash
+forge install aviggiano/console3
+```
 
 ## Usage
 
-### Build
+### ERC20 Token Balances
 
-```shell
-$ forge build
+```solidity
+console3.logERC20(token, accounts);
 ```
 
-### Test
+**Output:**
+```
+                                   account   balance
+0xc22B0348e8E4e484B29E161e992b0A1b4D1A50F0         0
+0xd4D7b9C047E1B06ccE298c883C1D8B2f642A5d06        11
+0x91A224Dc52a2C46293aa51BBbae7AaBa5a49c0ED       204
+0x2d208abb10F2FB825e460AeA9cFE58a782558BAa     3_009
+0xEF6d40732102D6A804E804C12BdD73dD56cfDEf5    40_016
+0xeF3a60961Bb0902df0fbCb6a9c4Ee0233aeCde57   500_025
 
-```shell
-$ forge test
+                          SUM(balanceOf())   543_265
+                             totalSupply()   543_265
 ```
 
-### Format
+### ERC4626 Vault Positions
 
-```shell
-$ forge fmt
+```solidity
+console3.logERC4626(vault, accounts);
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
+**Output:**
 ```
+                                   account      shares      assets
+0xc22B0348e8E4e484B29E161e992b0A1b4D1A50F0           0           0
+0xd4D7b9C047E1B06ccE298c883C1D8B2f642A5d06          11          21
+0x91A224Dc52a2C46293aa51BBbae7AaBa5a49c0ED         204         391
+0x2d208abb10F2FB825e460AeA9cFE58a782558BAa       3_009       5_778
+0xEF6d40732102D6A804E804C12BdD73dD56cfDEf5      40_016      76_846
+0xeF3a60961Bb0902df0fbCb6a9c4Ee0233aeCde57     500_025     960_250
 
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+                                    SUM(_)     543_265   1_043_286
+                                   total()     543_265   1_043_290
 ```
